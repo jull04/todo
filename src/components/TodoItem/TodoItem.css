@@ -60,9 +60,18 @@
   border: 1px solid #424242;
   border-radius: 8px;
   padding: 5px 20px;
+  transition: opacity .3s linear;
+}
+
+.item-disabled {
+  opacity: 0.5;
 }
 
 .item-title {
+}
+
+.item-title-disabled {
+  text-decoration: line-through;
 }
 
 .delete-button {
