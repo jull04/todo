@@ -19,3 +19,11 @@
 .filter-item:hover {
   opacity: 0.5;
 }
+
+.filter-item.active {
+  text-decoration: underline;
+}
+
+.delete-all-button {
+  color: #f4425d;
+}

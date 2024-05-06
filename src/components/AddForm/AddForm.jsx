@@ -1,10 +1,14 @@
 import { useState } from "react";
 import "./AddForm.css";
 
-function AddForm({handleAdd, tasksFilter}) {
-
+function AddForm({ handleAdd, tasksFilter, onDelete }) {
   const [taskName, setTaskName] = useState("");
   const [searchError, setSearchError] = useState("");
+  const [activeFilter, setActiveFilter] = useState("all");
+
+  const setFilter = (filter) => {
+    setActiveFilter(filter);
+  };
 
   function onAdd(evt) {
     evt.preventDefault();
@@ -12,8 +16,7 @@ function AddForm({handleAdd, tasksFilter}) {
       handleAdd(taskName);
       setSearchError("");
       setTaskName("");
-    }
-    else {
+    } else {
       setSearchError("Input must be filled in");
     }
   }
@@ -38,9 +41,39 @@ function AddForm({handleAdd, tasksFilter}) {
       </form>
       <span className="input__error">{searchError}</span>
       <div className="input-filter">
-        <button className="filter-item" onClick={() => tasksFilter('all')}>All</button>
-        <button className="filter-item" onClick={() => tasksFilter(false)}>Active</button>
-        <button className="filter-item" onClick={() => tasksFilter(true)}>Completed</button>
+        <button
+          onClick={() =>  {
+            tasksFilter("all")
+            setFilter('all')}
+          }
+          className={`filter-item ${activeFilter === "all" ? "active" : ""}`}
+        >
+          All
+        </button>
+        <button
+          onClick={() => {
+            tasksFilter(false)
+            setFilter(false)
+          }}
+          className={`filter-item ${activeFilter === false ? "active" : ""}`}
+        >
+          Active
+        </button>
+        <button
+          onClick={() => {
+            tasksFilter(true)
+            setFilter(true)
+          }}
+          className={`filter-item ${activeFilter === true ? "active" : ""}`}
+        >
+          Completed
+        </button>
+        <button
+          onClick={() => onDelete()}
+          className="filter-item delete-all-button"
+        >
+          Delete All Completed
+        </button>
       </div>
     </section>
   );
