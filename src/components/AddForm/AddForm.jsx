@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./AddForm.css";
 
-function AddForm({handleAdd}) {
+function AddForm({handleAdd, tasksFilter}) {
 
   const [taskName, setTaskName] = useState("");
   const [searchError, setSearchError] = useState("");
@@ -37,6 +37,11 @@ function AddForm({handleAdd}) {
         </button>
       </form>
       <span className="input__error">{searchError}</span>
+      <div className="input-filter">
+        <button className="filter-item" onClick={() => tasksFilter('all')}>All</button>
+        <button className="filter-item" onClick={() => tasksFilter(false)}>Active</button>
+        <button className="filter-item" onClick={() => tasksFilter(true)}>Completed</button>
+      </div>
     </section>
   );
 }

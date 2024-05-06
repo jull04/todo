@@ -1,3 +1,21 @@
 .search {
   margin: 0 340px;
 }
+
+.input-filter {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin: 10px auto;
+}
+
+.filter-item {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: white;
+}
+
+.filter-item:hover {
+  opacity: 0.5;
+}

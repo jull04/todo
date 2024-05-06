@@ -5,8 +5,18 @@ import "./App.css";
 
 function App() {
   const [tasks, setTasks] = useState([]);
+  const [filtered, setFiltered] = useState(tasks);
+
+  function tasksFilter(done) {
+    if (done === "all") {
+      setFiltered(tasks)
+    } else {
+      let newTasks = [...tasks].filter(item => item.done === done);
+      setFiltered(newTasks);
+  }}
 
   useEffect(() => {
+    setFiltered(tasks)
     if (tasks.length !== 0) {
       localStorage.setItem("tasks", JSON.stringify(tasks));
     }
@@ -45,9 +55,10 @@ function App() {
       <h1 className="title">{numberDone}/{numberAll} Complete</h1>
       <AddForm
         handleAdd={handleAdd}
+        tasksFilter={tasksFilter}
       />
       <ul className="list">
-      {tasks.map((task, index) => (
+      {filtered.map((task, index) => (
         <TodoItem 
         {...task}
         onDone={done => handleDone(index, done)}
