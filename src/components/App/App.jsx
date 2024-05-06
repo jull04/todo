@@ -32,6 +32,11 @@ function App() {
     setTasks(updatedTasks);
   }
 
+  function handleDeleteCompletedTasks () {
+    const updatedTasks = tasks.filter(task => !task.done);
+    setTasks(updatedTasks);
+  }
+
   function handleDone(index, newDone) {
     setTasks(prev => {
       const newTasks = [...prev];
@@ -56,6 +61,7 @@ function App() {
       <AddForm
         handleAdd={handleAdd}
         tasksFilter={tasksFilter}
+        onDelete = {handleDeleteCompletedTasks}
       />
       <ul className="list">
       {filtered.map((task, index) => (
