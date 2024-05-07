@@ -16,6 +16,12 @@
   justify-content: space-between;
 }
 
+@media  screen and (max-width: 767px) {
+  .inputForm {
+    width: auto;
+  }
+}
+
 .input {
   width: 100%;
   margin: 0 10px 0 0;
@@ -29,6 +35,12 @@
   border: 1px solid #424242;
   border-radius: 8px;
   padding: 10px;
+}
+
+@media  screen and (max-width: 767px) {
+  .input {
+    width: auto;
+  }
 }
 
 .list {
@@ -61,6 +73,12 @@
   border-radius: 8px;
   padding: 5px 20px;
   transition: opacity .3s linear;
+}
+
+@media  screen and (max-width: 767px) {
+  .item {
+    width: 300px;
+  }
 }
 
 .item-disabled {

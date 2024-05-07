@@ -1,5 +1,5 @@
 .search {
-  margin: 0 340px;
+  margin: 0 auto;
 }
 
 .input-filter {
@@ -7,6 +7,13 @@
   gap: 20px;
   justify-content: center;
   margin: 10px auto;
+}
+
+@media  screen and (max-width: 767px) {
+  .input-filter {
+   gap: 5px;
+   margin-left: 10px;
+  }
 }
 
 .filter-item {
