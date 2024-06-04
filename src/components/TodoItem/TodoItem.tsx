@@ -1,8 +1,15 @@
-import Checkbox from "../Checkbox/Checkbox";
+import React from "react";
+import Checkbox from "../Checkbox/Checkbox.tsx";
 import "./TodoItem.css";
 
-function TodoItem({ taskName, done, onDelete, onDone }) {
+export type TodoItemProps = {
+  taskName: string;
+  done: boolean;
+  onDelete: () => void;
+  onDone: (done: boolean) => void;
+}
 
+function TodoItem ({ taskName, done, onDelete, onDone }: TodoItemProps) {
   return (
     <li className={`item ${done && 'item-disabled'}`}>
       <Checkbox checked={done} onClick ={() => onDone(!done)}/>

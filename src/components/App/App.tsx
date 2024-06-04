@@ -1,13 +1,15 @@
+import React from "react";
 import { useEffect, useState } from "react";
-import AddForm from "../AddForm/AddForm";
-import TodoItem from "../TodoItem/TodoItem";
+import AddForm from "../AddForm/AddForm.tsx";
+import TodoItem from "../TodoItem/TodoItem.tsx";
 import "./App.css";
+import { Task } from "../../utils/types";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
-  const [filtered, setFiltered] = useState(tasks);
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [filtered, setFiltered] = useState<Task[]>(tasks);
 
-  function tasksFilter(done) {
+  function tasksFilter(done: boolean | "all") {
     if (done === "all") {
       setFiltered(tasks)
     } else {
@@ -23,11 +25,11 @@ function App() {
   }, [tasks]);
 
   useEffect(() => {
-    const storedTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+    const storedTasks: Task[] = JSON.parse(localStorage.getItem("tasks") || "[]");
     setTasks(storedTasks);
   }, []);
 
-  function handleDelete(index) {
+  function handleDelete(index: number) {
     const updatedTasks = tasks.filter((_, i) => i !== index);
     setTasks(updatedTasks);
   }
@@ -37,7 +39,7 @@ function App() {
     setTasks(updatedTasks);
   }
 
-  function handleDone(index, newDone) {
+  function handleDone(index: number, newDone: boolean) {
     setTasks(prev => {
       const newTasks = [...prev];
       newTasks[index].done = newDone;
@@ -45,7 +47,7 @@ function App() {
     })
   }
 
-  function handleAdd(taskName) {
+  function handleAdd(taskName: string) {
     setTasks(prev => {
       return [{taskName: taskName, done: false}, ...prev];
     })  

@@ -1,16 +1,22 @@
-import { useState } from "react";
+import React, { useState, FormEvent, ChangeEvent } from "react";
 import "./AddForm.css";
 
-function AddForm({ handleAdd, tasksFilter, onDelete }) {
-  const [taskName, setTaskName] = useState("");
-  const [searchError, setSearchError] = useState("");
-  const [activeFilter, setActiveFilter] = useState("all");
+export type AddFormProps = {
+  handleAdd: (taskName: string) => void;
+  tasksFilter: (done: boolean | "all") => void;
+  onDelete: () => void;
+}
 
-  const setFilter = (filter) => {
+function AddForm({ handleAdd, tasksFilter, onDelete }: AddFormProps) {
+  const [taskName, setTaskName] = useState<string>("");
+  const [searchError, setSearchError] = useState<string>("");
+  const [activeFilter, setActiveFilter] = useState<boolean | "all">("all");
+
+  const setFilter = (filter: boolean | "all") => {
     setActiveFilter(filter);
   };
 
-  function onAdd(evt) {
+  function onAdd(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
     if (taskName !== "") {
       handleAdd(taskName);
@@ -21,6 +27,11 @@ function AddForm({ handleAdd, tasksFilter, onDelete }) {
     }
   }
 
+  function onTaskNameChange(evt: ChangeEvent<HTMLInputElement>) {
+    setTaskName(evt.target.value);
+    setSearchError("");
+  };
+
   return (
     <section className="search">
       <form className="inputForm" name="search" onSubmit={onAdd} noValidate>
@@ -30,10 +41,7 @@ function AddForm({ handleAdd, tasksFilter, onDelete }) {
           name="add"
           placeholder="Enter a task..."
           value={taskName}
-          onChange={(evt) => {
-            setTaskName(evt.target.value);
-            setSearchError("");
-          }}
+          onChange={onTaskNameChange}
         />
         <button type="submit" className="add-button">
           Add
