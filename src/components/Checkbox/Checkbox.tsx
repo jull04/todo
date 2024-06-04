@@ -1,6 +1,12 @@
+import React from "react";
 import "./Checkbox.css";
 
-function Checkbox({checked = true, onClick}) {
+export type CheckboxProps = {
+  checked?: boolean;
+  onClick: () => void;
+}
+
+function Checkbox ({checked = true, onClick}: CheckboxProps) {
 
   return (
     <div className="checkbox-container" onClick={onClick}>
